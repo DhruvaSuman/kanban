@@ -11,5 +11,10 @@ if docker ps -a --format '{{.Names}}' | awk -v n="${CONTAINER_NAME}" '$0 == n { 
   docker rm -f "${CONTAINER_NAME}" >/dev/null
 fi
 
-docker run -d --name "${CONTAINER_NAME}" -p "${PORT}:8000" "${IMAGE_NAME}"
+ENV_ARGS=()
+if [ -f ".env" ]; then
+  ENV_ARGS+=(--env-file .env)
+fi
+
+docker run -d --name "${CONTAINER_NAME}" -p "${PORT}:8000" "${ENV_ARGS[@]}" "${IMAGE_NAME}"
 echo "Running at http://localhost:${PORT}"

@@ -79,3 +79,42 @@ test("persists board changes after refresh", async ({ page }) => {
   await login(page);
   await expect(firstColumn.getByText("Persistent card")).toBeVisible();
 });
+
+test("renders AI chat response and applies board update", async ({ page }) => {
+  await page.route("**/api/ai/chat/user", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        assistant_message: "Added AI-generated task.",
+        board_updated: true,
+        board: {
+          columns: [
+            { id: "col-backlog", title: "Backlog", cardIds: ["card-ai"] },
+            { id: "col-discovery", title: "Discovery", cardIds: [] },
+            { id: "col-progress", title: "In Progress", cardIds: [] },
+            { id: "col-review", title: "Review", cardIds: [] },
+            { id: "col-done", title: "Done", cardIds: [] },
+          ],
+          cards: {
+            "card-ai": {
+              id: "card-ai",
+              title: "AI generated task",
+              details: "Created from chat",
+            },
+          },
+        },
+      }),
+    });
+  });
+
+  await page.goto("/");
+  await login(page);
+  await page
+    .getByPlaceholder("Ask AI to create or move cards...")
+    .fill("Add a task in backlog");
+  await page.getByRole("button", { name: "Send" }).click();
+
+  await expect(page.getByText("Added AI-generated task.")).toBeVisible();
+  await expect(page.getByText("AI generated task")).toBeVisible();
+});

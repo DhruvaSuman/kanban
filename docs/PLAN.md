@@ -184,15 +184,15 @@ This file is the execution plan for the MVP. Work proceeds phase-by-phase in ord
 - Validate connectivity with simple `2+2` check.
 
 ### Checklist
-- [ ] Add backend AI client using `OPENROUTER_API_KEY`.
-- [ ] Configure model `openai/gpt-oss-120b`.
-- [ ] Add minimal endpoint/service method for connectivity checks.
-- [ ] Handle and log common API errors clearly.
+- [x] Add backend AI client using `OPENROUTER_API_KEY`.
+- [x] Configure model `openai/gpt-oss-120b`.
+- [x] Add minimal endpoint/service method for connectivity checks.
+- [x] Handle and log common API errors clearly.
 
 ### Tests
-- [ ] Unit tests for request payload construction (mocked).
-- [ ] Integration test for `2+2` call (live or gated live test).
-- [ ] Failure-path test when key is missing/invalid.
+- [x] Unit tests for request payload construction (mocked).
+- [x] Integration test for `2+2` call (live or gated live test).
+- [x] Failure-path test when key is missing/invalid.
 
 ### Success Criteria
 - Backend can successfully call OpenRouter model.
@@ -210,15 +210,15 @@ This file is the execution plan for the MVP. Work proceeds phase-by-phase in ord
 - Propose and confirm structured schema before implementation.
 
 ### Checklist
-- [ ] Propose structured output schema for user approval.
-- [ ] Add backend prompt + payload builder with board JSON and history.
-- [ ] Parse and validate structured AI response.
-- [ ] Apply optional board update payload when present.
+- [x] Propose structured output schema for user approval.
+- [x] Add backend prompt + payload builder with board JSON and history.
+- [x] Parse and validate structured AI response.
+- [x] Apply optional board update payload when present.
 
 ### Tests
-- [ ] Unit tests for schema validation and parser behavior.
-- [ ] Unit tests for no-update and update response variants.
-- [ ] Integration tests proving board update application from AI output.
+- [x] Unit tests for schema validation and parser behavior.
+- [x] Unit tests for no-update and update response variants.
+- [x] Integration tests proving board update application from AI output.
 
 ### Success Criteria
 - Structured response contract is stable and documented.
@@ -235,16 +235,16 @@ This file is the execution plan for the MVP. Work proceeds phase-by-phase in ord
 - Reflect AI-driven board updates in UI automatically.
 
 ### Checklist
-- [ ] Add sidebar chat UI with message history.
-- [ ] Connect sidebar to backend AI endpoint.
-- [ ] Show assistant responses and loading/error states.
-- [ ] Refresh board state automatically when AI returns updates.
-- [ ] Ensure visual style follows project color scheme.
+- [x] Add sidebar chat UI with message history.
+- [x] Connect sidebar to backend AI endpoint.
+- [x] Show assistant responses and loading/error states.
+- [x] Refresh board state automatically when AI returns updates.
+- [x] Ensure visual style follows project color scheme.
 
 ### Tests
-- [ ] Frontend unit tests for chat widget interactions.
-- [ ] E2E tests for end-to-end chat request and response rendering.
-- [ ] E2E/integration test proving AI board update appears in UI.
+- [x] Frontend unit tests for chat widget interactions.
+- [x] E2E tests for end-to-end chat request and response rendering.
+- [x] E2E/integration test proving AI board update appears in UI.
 
 ### Success Criteria
 - Chat sidebar is usable and visually consistent.
@@ -253,3 +253,12 @@ This file is the execution plan for the MVP. Work proceeds phase-by-phase in ord
 
 ### Approval Gate
 - Final review and user sign-off on MVP completion.
+
+## Final Verification Snapshot
+
+- [x] Backend coverage run complete with `uv run pytest --cov=. --cov-report=term-missing`.
+- [x] Frontend coverage run complete with `npm run test:unit -- --coverage`.
+- [x] Frontend end-to-end suite run complete with `npm run test:e2e`.
+- [x] Aggregate coverage target met (>= 75%):
+  - Backend total coverage: 93%
+  - Frontend total statement coverage: 79.32%
